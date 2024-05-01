@@ -27,7 +27,8 @@ SET default_table_access_method = heap;
 CREATE TABLE public.tasks (
     id integer NOT NULL,
     created_at timestamp(0) without time zone DEFAULT now() NOT NULL,
-    task text
+    task text,
+    user_id character varying(50)
 );
 
 
@@ -66,10 +67,12 @@ ALTER TABLE ONLY public.tasks ALTER COLUMN id SET DEFAULT nextval('public.tasks_
 -- Data for Name: tasks; Type: TABLE DATA; Schema: public; Owner: testuser
 --
 
-COPY public.tasks (id, created_at, task) FROM stdin;
-1	2024-05-01 00:20:13	sasd
-2	2024-05-01 00:20:53	fsad
-3	2024-05-01 00:30:47	Поставить чайник
+COPY public.tasks (id, created_at, task, user_id) FROM stdin;
+1	2024-05-01 00:20:13	sasd	\N
+2	2024-05-01 00:20:53	fsad	\N
+3	2024-05-01 00:30:47	Поставить чайник	\N
+4	2024-05-02 00:05:42	a	1234746517
+5	2024-05-02 00:10:05	a	1234746517
 \.
 
 
@@ -77,7 +80,7 @@ COPY public.tasks (id, created_at, task) FROM stdin;
 -- Name: tasks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testuser
 --
 
-SELECT pg_catalog.setval('public.tasks_id_seq', 3, true);
+SELECT pg_catalog.setval('public.tasks_id_seq', 5, true);
 
 
 --
