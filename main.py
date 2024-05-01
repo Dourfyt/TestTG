@@ -1,10 +1,8 @@
 import telebot
 import psycopg2
+import config
 
-
-
-token = '6501489744:AAEVS3aoQG1JsbkJBWRdTWw7__JuWJvF43w'
-bot = telebot.TeleBot(token)
+bot = telebot.TeleBot(config.token)
 
 
 
@@ -18,7 +16,6 @@ def set_task(message):
     cursor.execute('''INSERT INTO tasks (task) VALUES (%s)''', (message.text,))
     conn.commit()
     bot.send_message(message.chat.id, "Запись успешно добавлена!")
-
 
 
 
