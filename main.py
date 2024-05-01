@@ -13,14 +13,14 @@ cursor = conn.cursor()
 
 
 def set_task(message):
-    cursor.execute('''INSERT INTO tasks (task) VALUES (%s)''', (message.text,))
+    cursor.execute('''INSERT INTO tasks (task, user_id) VALUES (%s, %s)''', (message.text, message.from_user.id))
     conn.commit()
     bot.send_message(message.chat.id, "Запись успешно добавлена!")
 
 
 
 def get_tasks(message):
-    cursor.execute("""SELECT * FROM tasks""")
+    cursor.execute("""SELECT * FROM tasks WHERE user_id = '%s'""", (message.from_user.id,))
     records = cursor.fetchall()
     counter = 1
     text = 'Вот список задач:\n'
@@ -40,7 +40,6 @@ def start_message(message):
         msg = bot.send_message(message.chat.id, 'Введите задачу')
         bot.register_next_step_handler(msg, set_task)
     elif message.text == '/tsk':
-        bot.send_message(message.chat.id, 'Вот список задач')
         get_tasks(message)
         
         
