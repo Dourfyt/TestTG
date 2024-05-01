@@ -1,19 +1,26 @@
 import telebot
 import psycopg2
-import datetime
+
 
 
 token = '6501489744:AAEVS3aoQG1JsbkJBWRdTWw7__JuWJvF43w'
 bot = telebot.TeleBot(token)
 
+
+
 conn = psycopg2.connect(dbname='test', user='testuser', 
                         password='test', host='localhost')
 cursor = conn.cursor()
+
+
 
 def set_task(message):
     cursor.execute('''INSERT INTO tasks (task) VALUES (%s)''', (message.text,))
     conn.commit()
     bot.send_message(message.chat.id, "Запись успешно добавлена!")
+
+
+
 
 def get_tasks(message):
     cursor.execute("""SELECT * FROM tasks""")
@@ -25,6 +32,9 @@ def get_tasks(message):
         text = text + f"\n{counter}. {task_text}\n"
         counter=counter+1
     bot.send_message(message.chat.id, text)
+    
+    
+    
 @bot.message_handler(commands=['start','add','tsk'])
 def start_message(message):
     if message.text == '/start':
@@ -35,4 +45,7 @@ def start_message(message):
     elif message.text == '/tsk':
         bot.send_message(message.chat.id, 'Вот список задач')
         get_tasks(message)
+        
+        
+        
 bot.polling(none_stop=True)
