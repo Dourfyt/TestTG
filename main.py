@@ -40,7 +40,6 @@ def start_message(message):
         msg = bot.send_message(message.chat.id, 'Введите задачу')
         bot.register_next_step_handler(msg, set_task)
     elif message.text == '/tsk':
-        bot.send_message(message.chat.id, 'Вот список задач')
         get_tasks(message)
         
         
