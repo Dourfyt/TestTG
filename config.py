@@ -1,3 +1,3 @@
 # Токен ТГ бота
 
-token = ''
+token = '6501489744:AAEVS3aoQG1JsbkJBWRdTWw7__JuWJvF43w'
