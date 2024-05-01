@@ -67,14 +67,6 @@ ALTER TABLE ONLY public.tasks ALTER COLUMN id SET DEFAULT nextval('public.tasks_
 -- Data for Name: tasks; Type: TABLE DATA; Schema: public; Owner: testuser
 --
 
-COPY public.tasks (id, created_at, task, user_id) FROM stdin;
-1	2024-05-01 00:20:13	sasd	\N
-2	2024-05-01 00:20:53	fsad	\N
-3	2024-05-01 00:30:47	Поставить чайник	\N
-4	2024-05-02 00:05:42	a	1234746517
-5	2024-05-02 00:10:05	a	1234746517
-\.
-
 
 --
 -- Name: tasks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: testuser
